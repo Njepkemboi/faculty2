@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="profile.css">
+    <title>Profile</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #110533;
+            padding-top: 20px;
+        }
+        
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .sidebar a:hover {
+            background-color: #c1a9cc;
+            color:black;
+        }
+        
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+  <div class="sidebar">
+    <a href="stdhome.html"> Home </a>
+    <a href="stdprofile.html"> Profile </a>
+    <a href="stdschool.html"> School </a>
+    <a href="stdquestions.html"> Questions </a>
+    <a href="stdevaluation.html"> Evaluation </a>
+</div>
+
+    <<div class="profile">
+        <img src="homeground.jpg" alt="Profile Photo" id="profile-photo">
+        <p><strong>Name:</strong> <span id="name">Jepkemboi naomi</span> <input type="text" id="edit-name" class="edit-input" placeholder="Enter new name"></p>
+        <p><strong>Email:</strong> <span id="email">nahumlagat@gmail.com</span> <input type="email" id="edit-email" class="edit-input" placeholder="Enter new email"></p>
+        <p><strong>Admission Number:</strong> <span id="admission-number">23ZAD1080</span> <input type="text" id="edit-admission" class="edit-input" placeholder="Enter new admission number"></p>
+        <p><strong>Course:</strong> <span id="course">Computer Science</span> <input type="text" id="edit-course" class="edit-input" placeholder="Enter new course"></p>
+        <button onclick="toggleEdit()">Edit Profile</button>
+        <button onclick="saveChanges()">Save Changes</button>
+      </div>
+      
+      <script>
+      function toggleEdit() {
+        var inputs = document.querySelectorAll('.edit-input');
+        var buttons = document.querySelectorAll('button');
+        inputs.forEach(input => {
+          input.style.display = input.style.display === 'none' ? 'inline-block' : 'none';
+        });
+        buttons.forEach(button => {
+          button.style.display = button.style.display === 'none' ? 'inline-block' : 'none';
+        });
+      }
+      
+      function saveChanges() {
+        var name = document.getElementById('edit-name').value;
+        var email = document.getElementById('edit-email').value;
+        var admission = document.getElementById('edit-admission').value;
+        var course = document.getElementById('edit-course').value;
+        
+        document.getElementById('name').textContent = name;
+        document.getElementById('email').textContent = email;
+        document.getElementById('admission-number').textContent = admission;
+        document.getElementById('course').textContent = course;
+        
+        toggleEdit();
+      }
+      </script>
+
+   
+</body>
+</html>

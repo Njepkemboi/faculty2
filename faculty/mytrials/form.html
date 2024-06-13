@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+  
+    <div class ="container">
+        <div class="row col-md-6-offset-3">
+            <div class="primary pannel-primary">
+                <div class="panel-heading text-center">
+                
+<h2>Registration Form</h2>
+</div>
+<div class="panel-body">
+<form action="connect.php" method="post">
+    <div class="form-group">
+    <label for="name">Name:</label><br>
+    <input type="text" class="form-control" id="name" name="name"><br><br>
+</div>
+<div class="form-group">
+    <label for="email">Email:</label><br>
+    <input type="email" class="form-control" id="email" name="email"><br><br>
+</div>
+
+
+    <div class="form-group">
+    <label for="password">Password:</label><br>
+    <input type="password" class="form-control" id="password" name="password"><br><br>
+</div>
+
+    <div class="form-group">
+    <label for="confirm_password">Confirm Password:</label><br>
+    <input type="password" class="form-control" id="confirm_password" name="confirm_password"><br><br>
+</div>
+
+    <div class="form-group">
+    <label for="message">Message:</label><br>
+    <textarea id="message" class="form-control" name="message"></textarea><br><br>
+</div>
+    <input type="submit" class="btn btn-primary">
+</form>
+
+</body>
+</html>

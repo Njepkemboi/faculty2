@@ -1,0 +1,35 @@
+*
+{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+body{
+    background-image: url(homeground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: sans-serif;
+}
+.menu-bar{
+    background: purple;
+    text-align: center;
+}
+.menu-bar ul li{
+    display: inline-flex;
+    list-style: none;
+    color:rgb(220, 215, 223);
+}
+.menu-bar ul li{
+    width:120px;
+    margin:15px;
+    padding:15px;
+}
+.menu-bar ul li a {
+    text-decoration:none;
+    color: rgb(220, 215, 223);
+}
+.ctive, .menu-bar ul li:hoover
+{
+    background: rgb(125, 175, 60);
+    border-radius: 5px;
+}

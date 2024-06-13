@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+
+
+        
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #110533;
+    padding-top: 20px;
+  }
+  
+  
+  .content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+  
+  
+  
+  .footer {
+  background-color: #3b043d;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  }
+  
+  
+  /* Style for side navigation bar links */
+  .sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #f2f2f2;
+    display: block;
+  }
+  
+  /* color of links on hover */
+  .sidebar a:hover {
+    background-color: #decde6;
+              color:black;
+  }
+  
+  /* Style dropdown menu */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Style dropdown button */
+  .dropdown .dropbtn {
+    background-color: inherit;
+    color: #f2f2f2;
+    padding: 10px 15px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  
+  /* Change the color of dropdown button on hover */
+  .dropdown:hover .dropbtn {
+    background-color: #decde6;
+  }
+  
+  /* Style the dropdown menu content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #381b68;
+    min-width: 200px;
+    z-index: 1;
+  }
+  
+  /* Style the links inside the dropdown */
+  .dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    color: rgb(39, 9, 63);
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(39, 9, 63);
+    min-width: 200px;
+    z-index: 1;
+  }
+  
+  /* Styles for the links inside the dropdown */
+  .dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+        /* SIDEBAR CSS ENDS HERE */
+
+
+        
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid navy;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: navy;
+            color: #fff;
+            cursor: pointer;
+        }
+        .btn-submit {
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h1 style="color: aliceblue;">Admin Panel</h1>
+        <a href="#Home">Dashboard</a>
+      <a href="academicyear.html">Academic year</a>
+      <a href="coursemanagement.html">Course Management</a>
+      <a href="unitmanagement.html">Unit Management</a>
+      <a href="evaluationcriterial.html">Evaluation criteria</a>
+      <a href="questionsmanagement.html">Questions management</a>
+      <div class="dropdown">
+        <button class="dropbtn">Schools</button>
+        <div class="dropdown-content">
+          <a href="#Courses">Computing Science</a>
+          <a href="#Courses">International Relations</a>
+          <a href="#Courses">Business</a>
+        </div>
+      </div>
+      <a href="deanmanagement.html">Dean management</a>
+      <a href="facultymanagement.html">Faculty management</a>
+      <a href="studentmanagement.html">Student management</a>
+      <a href="#reports">Evaluation reports</a>
+      <a href="#user">User Management</a>
+    </div>
+
+    <div class="form-container">
+        <form id="form">
+            <div class="question" id="question1">
+                <p>Question 1: What is your favorite color?</p>
+                <input type="radio" name="question1" value="Red"> Red<br>
+                <input type="radio" name="question1" value="Blue"> Blue<br>
+                <input type="radio" name="question1" value="Green"> Green<br>
+            </div>
+            <div class="question" id="question2" style="display: none;">
+                <p>Question 2: What is your age?</p>
+                <input type="text" name="question2">
+            </div>
+            <!-- Repeat this pattern for the remaining questions -->
+            
+            <button type="button" class="btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">Previous</button>
+            <button type="button" class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+            <button type="submit" class="btn btn-submit" id="submitBtn" style="display: none;">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        var currentQuestion = 1;
+        var totalQuestions = 3; // Total number of questions
+        
+        function nextQuestion() {
+            var currentDiv = document.getElementById('question' + currentQuestion);
+            currentDiv.style.display = 'none';
+            currentQuestion++;
+            var nextDiv = document.getElementById('question' + currentQuestion);
+            nextDiv.style.display = 'block';
+            
+            if (currentQuestion > 1) {
+                document.getElementById('prevBtn').style.display = 'inline-block';
+            }
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitBtn').style.display = 'inline-block';
+            }
+        }
+        
+        function prevQuestion() {
+            var currentDiv = document.getElementById('question' + currentQuestion);
+            currentDiv.style.display = 'none';
+            currentQuestion--;
+            var prevDiv = document.getElementById('question' + currentQuestion);
+            prevDiv.style.display = 'block';
+            
+            if (currentQuestion === 1) {
+                document.getElementById('prevBtn').style.display = 'none';
+            }
+            if (currentQuestion < totalQuestions) {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('submitBtn').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+

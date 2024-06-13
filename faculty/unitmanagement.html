@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management</title>
+    <style>
+
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+          }
+          
+          .sidebar {
+            height: 100%;
+            width: 220px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #110533;
+            padding-top: 20px;
+          }
+          
+          
+          .content {
+            margin-left: 200px;
+            padding: 20px;
+          }
+          
+          
+          
+          .footer {
+          background-color: #3b043d;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          }
+          
+          
+          /* Style for side navigation bar links */
+          .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #f2f2f2;
+            display: block;
+          }
+          
+          /* color of links on hover */
+          .sidebar a:hover {
+            background-color: #decde6;
+                      color:black;
+          }
+          
+          /* Style dropdown menu */
+          .dropdown {
+            position: relative;
+            display: inline-block;
+          }
+          
+          /* Style the dropdown menu content (hidden by default) */
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #381b68;
+            min-width: 200px;
+            z-index: 1;
+          }
+          
+          /* Style the links inside the dropdown */
+          .dropdown-content a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+          }
+          
+          /* background color to dropdown links on hover */
+          .dropdown-content a:hover {
+            background-color: #ddd;
+            color: rgb(39, 9, 63);
+          }
+          
+          /* Show the dropdown menu on hover */
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
+          
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(39, 9, 63);
+            min-width: 200px;
+            z-index: 1;
+          }
+          
+          /* Styles for the links inside the dropdown */
+          .dropdown-content a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+          }
+          
+          
+          /* Show the dropdown menu on hover */
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
+
+        /* SIDEBAR CSS ENDS HERE */
+
+
+          /* Style dropdown button */
+          .dropdown .dropbtn {
+            background-color: inherit;
+            color: #f2f2f2;
+            padding: 10px 15px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+          }
+          
+          /* Change the color of dropdown button on hover */
+          .dropdown:hover .dropbtn {
+            background-color: #decde6;
+          }
+          
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: navy;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid navy;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid navy;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: navy;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            float: right;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #001f4d;
+        }
+
+        .course-list {
+            margin-bottom: 20px;
+        }
+
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            padding: 8px;
+            border: 2px solid navy;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .course-item .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .course-item .actions button {
+            margin-left: 5px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+
+        .addCourseButton, .edit-button, .saveCourseButton, .cancelButton {
+            background-color: navy;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .addCourseButton:hover, .edit-button:hover, .saveCourseButton:hover, .cancelButton:hover {
+            background-color: #001f4d;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #8B0000;
+        }
+
+        .popup-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 2px solid navy;
+            border-radius: 8px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h1 style="color: aliceblue;">Admin Panel</h1>
+        <a href="#Home">Dashboard</a>
+      <a href="academicyear.html">Academic year</a>
+      <a href="coursemanagement.html">Course Management</a>
+      <a href="unitmanagement.html">Unit Management</a>
+      <a href="evaluationcriterial.html">Evaluation criteria</a>
+      <a href="questionsmanagement.html">Questions management</a>
+      <div class="dropdown">
+        <button class="dropbtn">Schools</button>
+        <div class="dropdown-content">
+          <a href="#Courses">Computing Science</a>
+          <a href="#Courses">International Relations</a>
+          <a href="#Courses">Business</a>
+        </div>
+      </div>
+      <a href="deanmanagement.html">Dean management</a>
+      <a href="facultymanagement.html">Faculty management</a>
+      <a href="studentmanagement.html">Student management</a>
+      <a href="#reports">Evaluation reports</a>
+      <a href="#user">User Management</a>
+    </div>
+
+    <div class="container">
+        <h2>Unit Management</h2>
+        <div class="course-list" id="courseList">
+            <!-- Course items will be dynamically added here -->
+        </div>
+        <button class="addCourseButton" id="addCourseButton">Add New Unit</button>
+    </div>
+
+    <!-- Popup form for adding/editing a course -->
+    <div class="popup-form" id="courseForm">
+        <h3 id="formTitle">Add New Unit</h3>
+        <form id="courseFormData">
+            <label for="courseCode">Unit Code:</label>
+            <input type="text" id="courseCode" name="courseCode" placeholder="Enter course code" required>
+
+            <label for="courseName">Unit Name:</label>
+            <input type="text" id="courseName" name="courseName" placeholder="Enter course name" required>
+
+            <label for="courseDescription">Description:</label>
+            <input type="text" id="courseDescription" name="courseDescription" placeholder="Enter course description" required>
+
+            <button type="submit" class="saveCourseButton" id="saveCourseButton">Save</button>
+            <button type="button" class="cancelButton" id="cancelButton">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Variables for course management
+            var courseList = document.getElementById("courseList");
+            var addCourseButton = document.getElementById("addCourseButton");
+            var courseForm = document.getElementById("courseForm");
+            var courseFormData = document.getElementById("courseFormData");
+            var saveCourseButton = document.getElementById("saveCourseButton");
+            var cancelButton = document.getElementById("cancelButton");
+            var formTitle = document.getElementById("formTitle");
+            var courseIndex = 0;
+
+            // Function to create course item HTML
+            function createCourseItemHTML(code, name, description) {
+                var html = `
+                    <div class="course-item" data-index="${courseIndex}">
+                        <div class="course-info">
+                            <strong>Course Code:</strong> ${code}<br>
+                            <strong>Course Name:</strong> ${name}<br>
+                            <strong>Description:</strong> ${description}
+                        </div>
+                        <div class="actions">
+                            <button class="edit-button">Edit</button>
+                            <button class="delete-button">Delete</button>
+                        </div>
+                    </div>
+                `;
+                return html;
+            }
+
+            // Function to add a new course
+            function addCourse(code, name, description) {
+                courseList.insertAdjacentHTML("beforeend", createCourseItemHTML(code, name, description));
+                courseIndex++;
+            }
+
+            // Function to clear the form fields
+            function clearForm() {
+                courseFormData.reset();
+            }
+
+            // Event listener for Add New Course button
+            addCourseButton.addEventListener("click", function() {
+                courseForm.style.display = "block";
+                formTitle.textContent = "Add New Course";
+                saveCourseButton.textContent = "Save";
+                clearForm();
+            });
+
+            // Event listener for Save Course button
+            saveCourseButton.addEventListener("click", function() {
+                var code = document.getElementById("courseCode").value;
+                var name = document.getElementById("courseName").value;
+                var description = document.getElementById("courseDescription").value;
+
+                if (code && name && description) {
+                    if (saveCourseButton.textContent === "Save") {
+                        addCourse(code, name, description);
+                        clearForm();
+                    } else {
+                        // Implement edit course functionality here...
+                        alert("Course edited successfully!");
+                    }
+                    courseForm.style.display = "none";
+                } else {
+                    alert("Please fill in all fields.");
+                }
+            });
+
+            // Event listener for Cancel button
+            cancelButton.addEventListener("click", function() {
+                courseForm.style.display = "none";
+            });
+
+            // Event delegation for Edit and Delete buttons
+            courseList.addEventListener("click", function(event) {
+                var target = event.target;
+                if (target.classList.contains("edit-button")) {
+                    var courseItem = target.closest(".course-item");
+                    var courseInfo = courseItem.querySelector(".course-info");
+                    var code = courseInfo.querySelector("strong:nth-of-type(1)").textContent.replace("Course Code: ", "");
+                    var name = courseInfo.querySelector("strong:nth-of-type(2)").textContent.replace("Course Name: ", "");
+                    var description = courseInfo.querySelector("strong:nth-of-type(3)").textContent.replace("Description: ", "");
+                    document.getElementById("courseCode").value = code;
+                    document.getElementById("courseName").value = name;
+                    document.getElementById("courseDescription").value = description;
+                    formTitle.textContent = "Edit Course";
+                    saveCourseButton.textContent = "Update";
+                    courseForm.style.display = "block";
+                } else if (target.classList.contains("delete-button")) {
+                    var confirmDelete = confirm("Are you sure you want to delete this course?");
+                    if (confirmDelete) {
+                        var courseItem = target.closest(".course-item");
+                        courseItem.remove();
+                        alert("Course deleted successfully!");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

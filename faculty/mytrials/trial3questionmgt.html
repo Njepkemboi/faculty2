@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-navy {
+            background-color: navy;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            border: 1px solid #888;
+            border-radius: 5px;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        input[type="text"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .popup button {
+            width: 100px;
+            padding: 10px;
+            background-color: navy;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Academic Year</th>
+                <th>Semester </th>
+                <th>Questions </th>
+                <th>Answered questions </th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            <tr>
+                <td>2023-2024</td>
+                <td>2</td>
+                <td>5</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>2023-2024</td>
+                <td>2</td>
+                <td>5</td>
+                <td>0</td>
+            </tr>
+            <tr>
+            
+    </table>
+
+    <button class="button-navy" onclick="openPopup()">Manage</button>
+
+    <div id="popup" class="popup">
+        <h2>Manage Questions</h2>
+        <label for="criteria">Criteria:</label>
+        <select id="criteria">
+            <option value="1">Criteria 1</option>
+            <option value="2">Criteria 2</option>
+            
+        </select>
+        <br>
+        <label for="questionNumber">Question Number:</label>
+        <input type="text" id="questionNumber">
+        <br>
+        <button onclick="saveChanges()" class="button-navy">Save</button>
+        <button onclick="closePopup()" class="button-navy">Cancel</button>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <h1>Evaluation 2023-2023</h1>
+
+    <div class="form">
+        <h2>Criteria</h2>
+        <div class="form-control">
+            <label for="criteria1">Criteria 1:</label>
+            <input type="text" id="criteria1">
+        </div>
+        <div class="form-control">
+            <label for="question1">Question:</label>
+            <input type="text" id="question1">
+        </div>
+    </div>
+
+    <button class="button-navy" onclick="openPopup()">Manage</button>
+</div>
+
+<div id="popup" class="popup">
+    <h2>Manage Questions</h2>
+    <!-- Popup content for managing questions -->
+    <button class="button-navy" onclick="closePopup()">Save</button>
+    <button class="button-navy" onclick="closePopup()">Cancel</button>
+</div>
+
+<script>
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+</script>
+
+
+
+
+
+<script>
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function saveChanges() {
+        // Logic to save changes goes here
+        closePopup(); // Close the popup after saving
+    }
+</script>
+
+</body>
+</html>

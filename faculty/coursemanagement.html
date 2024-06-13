@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Management</title>
+    <style>
+
+        
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #110533;
+    padding-top: 20px;
+  }
+  
+  
+  .content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+  
+  
+  
+  .footer {
+  background-color: #3b043d;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  }
+  
+  
+  /* Style for side navigation bar links */
+  .sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #f2f2f2;
+    display: block;
+  }
+  
+  /* color of links on hover */
+  .sidebar a:hover {
+    background-color: #decde6;
+              color:black;
+  }
+  
+  /* Style dropdown menu */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Style dropdown button */
+  .dropdown .dropbtn {
+    background-color: inherit;
+    color: #f2f2f2;
+    padding: 10px 15px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  
+  /* Change the color of dropdown button on hover */
+  .dropdown:hover .dropbtn {
+    background-color: #decde6;
+  }
+  
+  /* Style the dropdown menu content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #381b68;
+    min-width: 200px;
+    z-index: 1;
+  }
+  
+  /* Style the links inside the dropdown */
+  .dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* background of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    color: rgb(39, 9, 63);
+  }
+  
+  /* Display the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(39, 9, 63);
+    min-width: 200px;
+    z-index: 1;
+  }
+  
+  /* Styles for links inside the dropdown */
+  .dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  
+  /* dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* SIDEBAR CSS ENDS HERE */
+  
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            border: 1px solid navy;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: navy;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: navy;
+            color: #fff;
+        }
+
+        .add-button {
+            background-color: navy;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .edit-button {
+            background-color: navy;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .popup-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup-form input[type="text"] {
+            width: calc(100% - 22px); /* Adjusted for input padding */
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .popup-form input[type="submit"] {
+            background-color: navy;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+        }
+
+        .confirmation-box {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .confirmation-box button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .confirmation-box button.yes {
+            background-color: navy;
+            color: #fff;
+        }
+
+        .confirmation-box button.no {
+            background-color: red;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h1 style="color: aliceblue;">Admin Panel</h1>
+        <a href="#Home">Dashboard</a>
+      <a href="academicyear.html">Academic year</a>
+      <a href="coursemanagement.html">Course Management</a>
+      <a href="unitmanagement.html">Unit Management</a>
+      <a href="evaluationcriterial.html">Evaluation criteria</a>
+      <a href="questionsmanagement.html">Questions management</a>
+      <div class="dropdown">
+        <button class="dropbtn">Schools</button>
+        <div class="dropdown-content">
+          <a href="#Courses">Computing Science</a>
+          <a href="#Courses">International Relations</a>
+          <a href="#Courses">Business</a>
+        </div>
+      </div>
+      <a href="#dean">Dean management</a>
+      <a href="facultymanagement.html">Faculty management</a>
+      <a href="studentmanagement.html">Student management</a>
+      <a href="#reports">Evaluation reports</a>
+      <a href="#user">User Management</a>
+    </div>
+
+    <div class="container">
+        <h2>Courses Management</h2>
+        <button class="add-button" onclick="showAddForm()">Add Course</button>
+        <table id="coursesTable">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Courses data will be dynamically populated here -->
+                <tr>
+                    <td>Course 1</td>
+                    <td>
+                        <button class="edit-button" onclick="editCourse(this)">Edit</button>
+                        <button class="delete-button" onclick="confirmDeleteCourse(this)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Course 2</td>
+                    <td>
+                        <button class="edit-button" onclick="editCourse(this)">Edit</button>
+                        <button class="delete-button" onclick="confirmDeleteCourse(this)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Popup form for adding a course -->
+    <div class="popup-form" id="addForm" style="display: none;">
+        <h2>Add Course</h2>
+        <form id="addCourseForm" onsubmit="return addCourse()">
+            <input type="text" id="newCourseName" placeholder="Course Name" required><br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+    <!-- Popup form for editing a course -->
+    <div class="popup-form" id="editForm" style="display: none;">
+        <h2>Edit Course</h2>
+        <form id="editCourseForm" onsubmit="return saveEditedCourse()">
+            <input type="text" id="editedCourseName" placeholder="Course Name" required><br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+    <!-- Success message for adding a course -->
+    <div class="message" id="addSuccessMessage" style="display: none;">
+        Course added successfully.
+    </div>
+
+    <!-- Success message for editing a course -->
+    <div class="message" id="editSuccessMessage" style="display: none;">
+        Course edited successfully.
+    </div>
+
+    <!-- Confirmation box for deleting a course -->
+    <div class="confirmation-box" id="deleteConfirmationBox" style="display: none;">
+        Are you sure you want to delete this course?
+        <button class="yes" onclick="deleteCourseConfirmed()">Yes</button>
+        <button class="no" onclick="cancelDeleteCourse()">No</button>
+    </div>
+
+    <script>
+        function showAddForm() {
+            document.getElementById("addForm").style.display = "block";
+            document.getElementById("newCourseName").value = ""; // Clear the input field
+        }
+
+        function addCourse() {
+            var newCourseName = document.getElementById("newCourseName").value;
+
+            if (newCourseName.trim() === "") {
+                alert("Please enter a course name.");
+                return false;
+            }
+
+            var table = document.getElementById("coursesTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            cell1.innerHTML = newCourseName;
+            cell2.innerHTML = '<button class="edit-button" onclick="editCourse(this)">Edit</button> ' +
+                              '<button class="delete-button" onclick="confirmDeleteCourse(this)">Delete</button>';
+
+            // Hide the form and reset it
+            document.getElementById("addForm").style.display = "none";
+            document.getElementById("addCourseForm").reset();
+
+            // Display success message
+            document.getElementById("addSuccessMessage").style.display = "block";
+            setTimeout(function() {
+                document.getElementById("addSuccessMessage").style.display = "none";
+            }, 2000);
+
+            return false; // Prevent form submission
+        }
+
+        function editCourse(button) {
+            var row = button.parentNode.parentNode;
+            var courseName = row.cells[0].innerText;
+
+            // Show the edit form with the current course name
+            document.getElementById("editForm").style.display = "block";
+            document.getElementById("editedCourseName").value = courseName;
+            row.parentNode.removeChild(row); // Remove the row from the table
+        }
+
+        function saveEditedCourse() {
+            var editedCourseName = document.getElementById("editedCourseName").value;
+
+            if (editedCourseName.trim() === "") {
+                alert("Please enter a course name.");
+                return false;
+            }
+
+            var table = document.getElementById("coursesTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            cell1.innerHTML = editedCourseName;
+            cell2.innerHTML = '<button class="edit-button" onclick="editCourse(this)">Edit</button> ' +
+                              '<button class="delete-button" onclick="confirmDeleteCourse(this)">Delete</button>';
+
+            // Hide the form and reset it
+            document.getElementById("editForm").style.display = "none";
+            document.getElementById("editCourseForm").reset();
+
+            // Display success message
+            document.getElementById("editSuccessMessage").style.display = "block";
+            setTimeout(function() {
+                document.getElementById("editSuccessMessage").style.display = "none";
+            }, 2000);
+
+            return false; // Prevent form submission
+        }
+
+        function confirmDeleteCourse(button) {
+            var row = button.parentNode.parentNode;
+
+            // Show confirmation box for deleting the course
+            document.getElementById("deleteConfirmationBox").style.display = "block";
+            document.getElementById("deleteConfirmationBox").dataset.rowIndex = row.rowIndex;
+        }
+
+        function deleteCourseConfirmed() {
+            // Get the row index from the confirmation box
+            var rowIndex = document.getElementById("deleteConfirmationBox").dataset.rowIndex;
+
+            // Delete the course from the specific row
+            var table = document.getElementById("coursesTable").getElementsByTagName('tbody')[0];
+            table.deleteRow(rowIndex - 1);
+
+            // Hide the confirmation box
+            document.getElementById("deleteConfirmationBox").style.display = "none";
+        }
+
+        function cancelDeleteCourse() {
+            // Hide the confirmation box
+            document.getElementById("deleteConfirmationBox").style.display = "none";
+        }
+    </script>
+</body>
+</html>

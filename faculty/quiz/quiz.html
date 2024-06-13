@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="quiz.css">
+<title>Quiz</title>
+</head>
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #c7629d;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+        margin-top: 0;
+    }
+    .question {
+        margin-bottom: 20px;
+    }
+    .choice {
+        margin-bottom: 10px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="radio"],
+    input[type="text"] {
+        margin-right: 10px;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #46083b;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #603d99;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+    
+    input[type="text"]:focus {
+        border-color: #1f021c;
+        outline: none;
+    }
+
+    
+</style>
+<body>
+
+    <div class="container">
+        <h2>Quiz</h2>
+        <form action="">
+            <form id="quiz-form">
+            <!-- Multiple Choice Questions -->
+            <div class="question">
+                <p>Multiple Choice Questions:</p>
+                <p>1. What is the capital of France?</p>
+                <div class="choice">
+                    <input type="radio" id="paris" name="q1" value="paris">
+                    <label for="paris">Paris</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="london" name="q1" value="london">
+                    <label for="london">London</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="berlin" name="q1" value="berlin">
+                    <label for="berlin">Berlin</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="rome" name="q1" value="rome">
+                    <label for="rome">Rome</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Multiple Choice Questions:</p>
+                <p>1. What is the capital of France?</p>
+                <div class="choice">
+                    <input type="radio" id="paris" name="q1" value="paris">
+                    <label for="paris">Paris</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="london" name="q1" value="london">
+                    <label for="london">London</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="berlin" name="q1" value="berlin">
+                    <label for="berlin">Berlin</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="rome" name="q1" value="rome">
+                    <label for="rome">Rome</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Multiple Choice Questions:</p>
+                <p>1. What is the capital of France?</p>
+                <div class="choice">
+                    <input type="radio" id="paris" name="q1" value="paris">
+                    <label for="paris">Paris</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="london" name="q1" value="london">
+                    <label for="london">London</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="berlin" name="q1" value="berlin">
+                    <label for="berlin">Berlin</label>
+                </div>
+                <div class="choice">
+                    <input type="radio" id="rome" name="q1" value="rome">
+                    <label for="rome">Rome</label>
+                </div>
+            </div>
+
+    
+    
+            <!-- Text Entry Questions -->
+            <div class="question">
+                <p>Text Entry Questions:</p>
+                <p>1. Who is the current president of the United States?</p>
+                <input type="text" id="president" name="president">
+            </div>
+            <div class="question">
+                <p>2. What is the chemical symbol for water?</p>
+                <input type="text" id="water" name="water">
+            </div>
+            <div class="question">
+                <p>3. What is the tallest mountain in the world?</p>
+                <input type="text" id="mountain" name="mountain">
+            </div>
+            <div class="question">
+                <p>4. Who wrote 'Pride and Prejudice'?</p>
+                <input type="text" id="pride" name="pride">
+            </div>
+            <div class="question">
+                <p>5. What is the capital of Japan?</p>
+                <input type="text" id="japan" name="japan">
+            </div>
+    
+            <input type="submit" value="Submit" id="submit-btn">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .card {
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        .report-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #d8a3e6;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .report-container.open {
+            display: block;
+        }
+
+        .toggle-button {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: navy;
+            color: #fff;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .toggle-button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="card">
+        <h3>Total Number of Students</h3>
+        <p>500</p>
+    </div>
+    <div class="card">
+        <h3>Total Users</h3>
+        <p>100</p>
+    </div>
+</div>
+
+<div class="report-container" id="report-container">
+    <h3>Evaluation Report</h3>
+    <p>Question 1: Answer 1</p>
+    <p>Question 2: Answer 2</p>
+    <!-- Add more report content here -->
+</div>
+
+<button class="toggle-button" onclick="toggleReport()">Evaluation Report</button>
+
+<script>
+    function toggleReport() {
+        var reportContainer = document.getElementById('report-container');
+        reportContainer.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

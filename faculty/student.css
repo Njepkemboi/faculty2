@@ -1,0 +1,13 @@
+*
+{
+    padding:10px;
+    margin:10px ;
+}
+.form-select{
+    padding: 2px;
+    margin: 2px;
+    align-items: left;
+    text-align: left;
+    color:blueviolet;
+    background-color: aliceblue;
+}
