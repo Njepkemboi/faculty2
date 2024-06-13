@@ -70,7 +70,7 @@ if(!isset($_SESSION['username'])){
     <a href="stdschool.html"> School </a>
     <a href="stdquestions.html"> Questions </a>
     <a href="stdevaluation.html"> Evaluation </a>
-    <?php echo " <h1>Welcome ". $_SESSION['username']."</h1>";?>
+    <?php echo "<h1 style='color: white;'>Welcome ". $_SESSION['username']."</h1>";?>
     <a href="../logout.php">Logout</a>
 </div>
 
@@ -82,7 +82,7 @@ if(!isset($_SESSION['username'])){
         
         <br>Thank you for taking the time to explore our Faculty Evaluation Platform. Your participation is invaluable to us.</p>
 
-</div>
+</div> 
 
 </body>
 </html>
