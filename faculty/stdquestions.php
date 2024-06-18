@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Course Feedback Form</title>
+<title>Evaluation Form</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -52,11 +53,12 @@
 <body>
 
 <div class="container">
-  <h2>Course Feedback Form</h2>
-  <form id="feedbackForm">
+  <h2>Evaluation Form</h2>
+  <form id="feedbackForm"method="post" action="">
     <div class="form-group">
       <label for="course">Course Name:</label>
       <select id="course" name="course">
+        <option value="" selected hidden> course name </option>
         <option value="course1">Course 1</option>
         <option value="course2">Course 2</option>
         <option value="course3">Course 3</option>
@@ -65,6 +67,7 @@
     <div class="form-group">
       <label for="courseCode">Course Code:</label>
       <select id="courseCode" name="courseCode">
+      <option value="" selected hidden> Course code </option>
         <option value="code1">Code 1</option>
         <option value="code2">Code 2</option>
         <option value="code3">Code 3</option>
@@ -73,6 +76,7 @@
     <div class="form-group">
       <label for="faculty">Faculty Name:</label>
       <select id="faculty" name="faculty">
+      <option value="" selected hidden> Faculty Name </option>
         <option value="faculty1">Faculty 1</option>
         <option value="faculty2">Faculty 2</option>
         <option value="faculty3">Faculty 3</option>
@@ -118,28 +122,103 @@
       <label for="q6">6. Any additional comments or feedback:</label>
       <textarea id="q6" name="q6" rows="3"></textarea>
     </div>
-    <button type="submit">Submit Feedback</button>
+    <button type="submit">Submit Evaluation</button>
 
-  </form>
+  </method=>
 </div>
 
 <div id="thankYouMessage" class="thank-you" style="display: none;">
-    <div class="emoji">&#x1F389;</div>
     <p>Thank you for your feedback!</p>
   </div>
 
-<script>
+
+
+  
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+
+  // Database connection 
+  $servername = "localhost"; 
+  $username = "root"; 
+  $password = ""; 
+  $dbname = "facultyevaluation"; 
+
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+
+  // Check connection
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  // Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+  // SQL statement to insert data into a table
+  $stmt = $conn->prepare("INSERT INTO evaluation (test_name, course_code, faculty, q1, q2, q3, q4, q5, q6)
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+  // Bind parameters
+  $stmt->bind_param("sssssssss", $course_name, $course_code, $faculty, $q1, $q2, $q3, $q4, $q5, $q6);
+
+  // Set parameters from form data
+  $course_name = $_POST['course_name']; // Replace 'courseName' with the actual 'name' attribute of your course name select element
+  $course_code = $_POST['course_code']; // Replace 'courseCode' with the actual 'name' attribute of your course code select element
+  $faculty = $_POST['faculty']; // Replace 'faculty' with the actual 'name' attribute of your faculty select element
+  $q1 = $_POST['q1'];
+  $q2 = $_POST['q2'];
+  $q3 = $_POST['q3'];
+  $q4 = $_POST['q4'];
+  $q5 = $_POST['q5'];
+  $q6 = $_POST['q6'];
+
+  // Execute the statement
+  if ($stmt->execute()) {
+    echo "<script>alert('Feedback submitted successfully.');</script>";  } else {
+    echo "Error: " . $stmt->error;
+  }
+
+  // Close statement
+  $stmt->close();
+
+  // Close connection
+  $conn->close();
+}
+?>
+
+
+  <script>
   document.getElementById("feedbackForm").addEventListener("submit", function(event) {
     event.preventDefault();
     
     const formData = new FormData(this);
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
     
-    alert("Thank you for your feedback!");
-    // Reset the form
-    this.reset();
+    fetch('', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(data => {
+      console.log(data); // Log the response from PHP (success message or error)
+      document.getElementById("feedbackForm").reset(); // Reset the form after successful submission
+      document.getElementById("formContainer").style.display = "none"; // Hide the form
+      document.getElementById("thankYouMessage").style.display = "block"; // Show the thank you message
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("An error occurred, please try again later.");
+    });
   });
 </script>
 
