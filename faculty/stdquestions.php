@@ -54,10 +54,10 @@
 
 <div class="container">
   <h2>Evaluation Form</h2>
-  <form id="feedbackForm"method="post" action="">
+  <form id="feedbackForm" action="stdquestions.php" method="POST">
     <div class="form-group">
-      <label for="course">Course Name:</label>
-      <select id="course" name="course">
+      <label for="course_name">Course Name:</label>
+      <select id="course_name" name="course_name">
         <option value="" selected hidden> course name </option>
         <option value="course1">Course 1</option>
         <option value="course2">Course 2</option>
@@ -65,8 +65,8 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="courseCode">Course Code:</label>
-      <select id="courseCode" name="courseCode">
+      <label for="course_code">Course Code:</label>
+      <select id="course_code" name="course_code">
       <option value="" selected hidden> Course code </option>
         <option value="code1">Code 1</option>
         <option value="code2">Code 2</option>
@@ -134,93 +134,68 @@
 
 
   
-<?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-
-  // Database connection 
-  $servername = "localhost"; 
-  $username = "root"; 
-  $password = ""; 
-  $dbname = "facultyevaluation"; 
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
-
-  // Check if the form is submitted
+  <?php
+// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Validate and sanitize input data (ensure all variables are initialized)
+    $course_name = isset($_POST['course_name']) ? $_POST['course_name'] : '';
+    $course_code = isset($_POST['course_code']) ? $_POST['course_code'] : '';
+    $faculty = isset($_POST['faculty']) ? $_POST['faculty'] : '';
+    $q1 = isset($_POST['q1']) ? $_POST['q1'] : '';
+    $q2 = isset($_POST['q2']) ? $_POST['q2'] : '';
+    $q3 = isset($_POST['q3']) ? $_POST['q3'] : '';
+    $q4 = isset($_POST['q4']) ? $_POST['q4'] : '';
+    $q5 = isset($_POST['q5']) ? $_POST['q5'] : '';
+    $q6 = isset($_POST['q6']) ? $_POST['q6'] : '';
 
-  // SQL statement to insert data into a table
-  $stmt = $conn->prepare("INSERT INTO evaluation (test_name, course_code, faculty, q1, q2, q3, q4, q5, q6)
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    // Proceed only if required fields are not empty
+    if (!empty($course_name) && !empty($course_code)) {
 
-  // Bind parameters
-  $stmt->bind_param("sssssssss", $course_name, $course_code, $faculty, $q1, $q2, $q3, $q4, $q5, $q6);
+        // Database connection details
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "facultyevaluation";
 
-  // Set parameters from form data
-  $course_name = $_POST['course_name']; // Replace 'courseName' with the actual 'name' attribute of your course name select element
-  $course_code = $_POST['course_code']; // Replace 'courseCode' with the actual 'name' attribute of your course code select element
-  $faculty = $_POST['faculty']; // Replace 'faculty' with the actual 'name' attribute of your faculty select element
-  $q1 = $_POST['q1'];
-  $q2 = $_POST['q2'];
-  $q3 = $_POST['q3'];
-  $q4 = $_POST['q4'];
-  $q5 = $_POST['q5'];
-  $q6 = $_POST['q6'];
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-  // Execute the statement
-  if ($stmt->execute()) {
-    echo "<script>alert('Feedback submitted successfully.');</script>";  } else {
-    echo "Error: " . $stmt->error;
-  }
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-  // Close statement
-  $stmt->close();
+        // Prepare SQL statement to insert data into the database
+        $stmt = $conn->prepare("INSERT INTO evaluation (course_name, course_code, faculty, q1, q2, q3, q4, q5, q6)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-  // Close connection
-  $conn->close();
+        if (!$stmt) {
+            die("Error preparing statement: " . $conn->error);
+        }
+
+        // Bind parameters
+        $stmt->bind_param("sssssssss", $course_name, $course_code, $faculty, $q1, $q2, $q3, $q4, $q5, $q6);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "Feedback submitted successfully.";
+        } else {
+            echo "Error executing statement: " . $stmt->error;
+        }
+
+        // Close statement
+        $stmt->close();
+
+        // Close connection
+        $conn->close();
+    } else {
+        echo "Course name and course code are required fields.";
+    }
 }
 ?>
 
-
-  <script>
-  document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const formData = new FormData(this);
-    
-    fetch('', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text();
-    })
-    .then(data => {
-      console.log(data); // Log the response from PHP (success message or error)
-      document.getElementById("feedbackForm").reset(); // Reset the form after successful submission
-      document.getElementById("formContainer").style.display = "none"; // Hide the form
-      document.getElementById("thankYouMessage").style.display = "block"; // Show the thank you message
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert("An error occurred, please try again later.");
-    });
-  });
-</script>
+   
 
 </body>
 </html>
